@@ -1,0 +1,78 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  --glow-border: hsla(0, 0%, 100%, 0.1);
+  --accent-1: #5d5dfa;
+  --accent-2: #fa625d;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+
+  a:hover {
+    color: #747bff;
+  }
+
+  button {
+    background-color: #f9f9f9;
+  }
+}
+
+#root,
+.page {
+  width: 100vw;
+  height: 100vh;
+  padding: 0;
+  max-width: unset !important;
+}
+
+.gap-1 {
+  gap: 1rem;
+}
+
+.br-1 {
+  border-radius: 4rem;
+}
+
+.glow-top {
+  border-top: 1px solid var(--glow-border);
+}
+
+.glow-bottom {
+  border-bottom: 1px solid var(--glow-border);
+}
+
+.fancy-text {
+  background: -webkit-linear-gradient(45deg, var(--accent-1), var(--accent-2));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.title {
+  font-weight: 700;
+  font-size: 3rem;
+  line-height: 1.2;
+}
