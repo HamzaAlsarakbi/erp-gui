@@ -1,4 +1,4 @@
-import LoginComponent from '@/features/login/LoginComponent';
+import LoginComponent from '@/features/auth/LoginComponent';
 import React, { useEffect } from 'react';
 
 const Login: React.FC = () => {

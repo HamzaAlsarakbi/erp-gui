@@ -1,27 +1,33 @@
 import { useEffect, useState } from 'react';
 
 import './Splash.css';
-import { useBoundedStore } from '@/features/store';
 import { useInterval } from '@/utils/useInterval';
 import { Spinner } from '@heroui/react';
 import { SPLASH_HINTS } from '@/constants/splash';
 import { SECONDS_TO_MS } from '@/constants/time';
 import { AxiosError, HttpStatusCode } from 'axios';
-import { PLANS_API } from '@/features/plans/plansApi';
 import Logo from '@/components/icons/Logo';
+import { USER_API } from '@/features/user/userApi';
+import { useAuth } from '@/features/auth/authSlice';
+import { useNavigate } from 'react-router-dom';
+import { ROUTES } from '@/constants/routes';
 
 const Splash = () => {
-  const { setPath } = useBoundedStore((state) => state.app);
   const [hint, setHint] = useState('');
+  const setUser = useAuth((s) => s.setUser);
+  const navigate = useNavigate();
 
   useInterval(async () => {
     try {
-      await PLANS_API.getPlans();
-      setPath('dashboard');
+      let user = await USER_API.get();
+      if (user.status === HttpStatusCode.Ok) {
+        setUser(user.data);
+        navigate(ROUTES.portal);
+      }
     } catch (error) {
       const e = error as AxiosError;
       if (e.status === HttpStatusCode.Unauthorized) {
-        setPath('login');
+        navigate(ROUTES.login);
       } else {
         console.error(e);
       }

@@ -1,29 +1,25 @@
 import './App.css';
 import Login from '@/pages/Login';
-import { useBoundedStore } from './features/store';
 import Dashboard from './pages/Dashboard';
 import './App.css';
 import Splash from './pages/splash/Splash';
-import { ClockMenu } from './pages/ClockMenu';
+import { Attendance } from './pages/Attendance';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { ROUTES } from './constants/routes';
 
 function App() {
-  const path = useBoundedStore((state) => state.app.path);
-
   return (
-    <div className="app bg-zinc-50">
-      {path === 'login' ? (
-        <Login />
-      ) : path === 'dashboard' ? (
-        <Dashboard />
-      ) : path === 'splash' ? (
-        // TODO: Add a splash screen
-        <Splash />
-      ) : path === 'clock_menu' ? (
-        <ClockMenu />
-      ) : (
-        // TODO: Add a 404 page
-        <div>404</div>
-      )}
+    <div className="app light bg-zinc-100">
+      <BrowserRouter>
+        <Routes>
+          <Route path={ROUTES.login} element={<Login />} />
+          {/* TODO: make this protected */}
+          <Route path={ROUTES.dashboard} element={<Dashboard />} />
+          <Route path={ROUTES.splash} element={<Splash />} />
+          <Route path={ROUTES.attendance} element={<Attendance />} />
+          <Route path="*" element={<div>404</div>} />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }

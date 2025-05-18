@@ -1,27 +1,24 @@
 import { Theme } from '@/assets/themes/themes';
-import { StateCreator } from 'zustand';
+import { create } from 'zustand';
 
 export type AppPath = 'login' | 'splash' | 'dashboard' | 'clock_menu';
 
 export interface AppSlice {
   app: {
     theme: Theme;
-    path: AppPath;
     isDevMode: boolean;
     setTheme: (theme: Theme) => void;
-    setPath: (path: AppPath) => void;
     setIsDevMode: (devMode: boolean) => void;
   };
 }
 
-export const createAppSlice: StateCreator<AppSlice> = (set): AppSlice => ({
+export const useApp = create<AppSlice>((set) => ({
   app: {
     theme: 'dark',
-    path: 'splash',
     isDevMode: false,
-    setTheme: (theme) => set((state) => ({ app: { ...state.app, theme } })),
-    setPath: (path) => set((state) => ({ app: { ...state.app, path } })),
+    setTheme: (theme: any) =>
+      set((state) => ({ app: { ...state.app, theme } })),
     setIsDevMode: (isDevMode) =>
       set((state) => ({ app: { ...state.app, isDevMode } })),
   },
-});
+}));

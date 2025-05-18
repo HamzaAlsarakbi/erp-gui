@@ -1,3 +1,4 @@
+import { ROUTES } from '@/constants/routes';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -13,9 +14,20 @@ const Portal: React.FC = () => {
       <h1>Portal Page</h1>
       <p>Select a destination:</p>
       <ul style={linkListStyles}>
-        <li style={linkItemStyles} onClick={() => handleNavigation('/dashboard')}>Go to Dashboard</li>
-        <li style={linkItemStyles} onClick={() => handleNavigation('/profile')}>Go to Profile</li>
-        <li style={linkItemStyles} onClick={() => handleNavigation('/settings')}>Go to Settings</li>
+        <li
+          style={linkItemStyles}
+          onClick={() => handleNavigation(ROUTES.dashboard)}
+        >
+          Go to Dashboard
+        </li>
+        <li
+          style={linkItemStyles}
+          onClick={() => handleNavigation(ROUTES.attendance)}
+        >
+          Go to Attendance menu
+        </li>
+        {/* <li style={linkItemStyles} onClick={() => handleNavigation('/profile')}>Go to Profile</li> */}
+        {/* <li style={linkItemStyles} onClick={() => handleNavigation('/settings')}>Go to Settings</li> */}
       </ul>
     </div>
   );

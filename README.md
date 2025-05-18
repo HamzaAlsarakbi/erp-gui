@@ -1,14 +1,14 @@
-# Finance Fusion GUI
+# ERP GUI
 
-This is the gui responsitory for the finance fusion project.
+This is the gui responsitory for the ERP project.
 
-## What is Finance Fusion?
+## What is ERP?
 
-Finance Fusion is a program that helps you manage your money, set budgets, and save.
+ERP is a program that helps you manage your money, set budgets, and save.
 
 It is a work in progress, will post a roadmap soon.
 
-[Here's the related backend repository](https://github.com/HamzaAlsarakbi/finance-fusion).
+[Here's the related backend repository](https://github.com/HamzaAlsarakbi/erp-gui).
 
 ## Instalation
 

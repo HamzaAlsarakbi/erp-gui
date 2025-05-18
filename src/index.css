@@ -43,10 +43,8 @@ body {
 
 #root,
 .page {
-  width: 100vw;
   height: 100vh;
   padding: 0;
-  max-width: unset !important;
 }
 
 .gap-1 {
@@ -68,6 +66,7 @@ body {
 .fancy-text {
   background: -webkit-linear-gradient(45deg, var(--accent-1), var(--accent-2));
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
@@ -76,3 +75,4 @@ body {
   font-size: 3rem;
   line-height: 1.2;
 }
+

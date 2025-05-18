@@ -2,16 +2,20 @@ import { Button, Input } from '@heroui/react';
 import React, { useEffect, useState } from 'react';
 import { PasswordInput } from '@/components/PasswordInput/PasswordInput';
 import './LoginComponent.css';
-import { useBoundedStore } from '../store';
-import { AUTH_API } from './authApi';
+import { AUTH_API } from '@/features/auth/authApi';
+import { USER_API } from '@/features/user/userApi';
 import { AxiosError, HttpStatusCode } from 'axios';
+import { useAuth } from '@/features/auth/authSlice';
+import { useNavigate } from 'react-router-dom';
+import { ROUTES } from '@/constants/routes';
 
 const LoginComponent: React.FC = () => {
-  const app = useBoundedStore((state) => state.app);
+  const setUser = useAuth((s) => s.setUser);
   const [error, setError] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const errorRef = React.createRef<HTMLDivElement>();
+  const navigate = useNavigate();
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
@@ -21,8 +25,20 @@ const LoginComponent: React.FC = () => {
     }
     try {
       const response = await AUTH_API.login(username, password);
-      if (response.status === 200) {
-        app.setPath('splash');
+      if (response.status === HttpStatusCode.Ok) {
+        const user = await USER_API.get(username);
+
+        // Check if the user is logged in
+        if (user.status === HttpStatusCode.Ok) {
+          setUser(user.data);
+          navigate(ROUTES.portal);
+        } else {
+          setError('An unknown error occurred, cannot retrieve user data.');
+          console.error(user);
+        }
+      } else {
+        setError('An unknown error occurred, please try again later.');
+        console.error(response);
       }
     } catch (error) {
       const e = error as AxiosError;
@@ -56,8 +72,8 @@ const LoginComponent: React.FC = () => {
   };
 
   return (
-    <div className="login-component glow-top flex flex-col px-4 py-4 gap-1 rounded-medium bg-zinc-900">
-      <h1 className="title fancy-text shadow-md">Finance Fusion</h1>
+    <div className="login-component glow-top flex flex-col px-4 py-4 gap-1 rounded-medium bg-zinc-100">
+      <h1 className="title fancy-text shadow-md">ERP</h1>
       <h2>Login</h2>
       <form
         onSubmit={(event) => {

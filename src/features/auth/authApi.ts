@@ -1,6 +1,11 @@
 import axios, { AxiosResponse } from 'axios';
-import { REST } from '@/constants/rest';
+import { REST_HOST } from '@/constants/rest';
 import { AppError } from '@/constants/appError';
+
+const REST = {
+  login: `${REST_HOST}/auth/login`,
+  logout: `${REST_HOST}/auth/logout`,
+};
 
 /**
  * This function sends a POST request to the server to log in the user.
@@ -13,7 +18,7 @@ const postLogin = async (
   password: string,
 ): Promise<AxiosResponse<string, AppError>> =>
   await axios.post(
-    REST.auth.login,
+    REST.login,
     { username, password },
     { withCredentials: true },
   );
