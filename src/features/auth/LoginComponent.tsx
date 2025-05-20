@@ -17,6 +17,17 @@ const LoginComponent: React.FC = () => {
   const errorRef = React.createRef<HTMLDivElement>();
   const navigate = useNavigate();
 
+  useEffect(() => {
+    const fetchUser = async () => {
+      const user = await USERS_API.get.me();
+      if (user.status === HttpStatusCode.Ok) {
+        setUser(user.data);
+        navigate(ROUTES.portal);
+      }
+    };
+    fetchUser();
+  }, []);
+
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     if (error.trim().length > 0) {
@@ -26,7 +37,7 @@ const LoginComponent: React.FC = () => {
     try {
       const response = await AUTH_API.login(username, password);
       if (response.status === HttpStatusCode.Ok) {
-        const user = await USERS_API.me(username);
+        const user = await USERS_API.get.me();
 
         // Check if the user is logged in
         if (user.status === HttpStatusCode.Ok) {
@@ -73,7 +84,7 @@ const LoginComponent: React.FC = () => {
 
   return (
     <div className="login-component glow-top flex flex-col px-4 py-4 gap-1 rounded-medium bg-zinc-300">
-      <h1 className="title fancy-text">ERP</h1>
+      <h1 className="title fancy-text text-center">ERP</h1>
       <h2>Login</h2>
       <form
         onSubmit={(event) => {

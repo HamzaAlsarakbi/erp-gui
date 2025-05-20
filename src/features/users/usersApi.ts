@@ -5,7 +5,7 @@ import { UserState } from '@/features/auth/authSlice';
 
 const REST = {
   create: `${REST_HOST}/users`,
-  me: `${REST_HOST}/users/me/`,
+  me: `${REST_HOST}/users/me`,
   update: (username: string) => `${REST_HOST}/users/${username}`,
   delete: (username: string) => `${REST_HOST}/users/${username}`,
 };
