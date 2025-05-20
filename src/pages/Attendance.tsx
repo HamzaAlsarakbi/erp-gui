@@ -5,7 +5,19 @@ import { VITALS_API } from '@/features/vitals/vitalsApi';
 import { TimeFormat } from '@/features/vitals/vitalsModel';
 import { SelectMap } from '@/utils/heroui';
 import { useInterval } from '@/utils/useInterval';
-import { addToast, Button, Select, SelectItem } from '@heroui/react';
+import {
+  addToast,
+  Button,
+  Select,
+  SelectItem,
+  Table,
+  TableBody,
+  TableCell,
+  TableColumn,
+  TableHeader,
+  TableRow,
+} from '@heroui/react';
+import { HttpStatusCode } from 'axios';
 import React, { useEffect, useState } from 'react';
 
 export const Attendance: React.FC = () => {
@@ -28,8 +40,9 @@ export const Attendance: React.FC = () => {
       .catch((error) => {
         console.error('Error fetching employees:', error);
         addToast({
-          title: 'Toast Title',
-          description: 'Toast Description',
+          title: 'Error',
+          color: 'danger',
+          description: 'Failed to fetch employees',
         });
       });
     setEmployees([]);
@@ -54,8 +67,9 @@ export const Attendance: React.FC = () => {
       .catch((error) => {
         console.error('Error fetching server time:', error);
         addToast({
-          title: 'Toast Title',
-          description: 'Toast Description',
+          title: 'Error Reaching Server',
+          color: 'danger',
+          description: 'Failed to fetch server time',
         });
       });
   }, 1 * SECONDS_TO_MS);
@@ -73,15 +87,19 @@ export const Attendance: React.FC = () => {
 
     EMPLOYEES_API.clockIn(selectedEmployeeId)
       .then((response) => {
-        if (response.status === 200) {
-        } else {
-          throw new Error('Failed to clock in');
+        console.log(response);
+        if (response.status === HttpStatusCode.Created) {
+          addToast({
+            title: 'Clocked in',
+            color: 'success',
+            description: `You have clocked in successfully!`,
+          });
         }
       })
       .catch((error) => {
         console.error('Error clocking in:', error);
         addToast({
-          title: 'Error clocking in',
+          title: 'Error Clocking in',
           color: 'warning',
           description: error.response.data.message,
         });
@@ -93,15 +111,18 @@ export const Attendance: React.FC = () => {
 
     EMPLOYEES_API.clockOut(selectedEmployeeId)
       .then((response) => {
-        if (response.status === 200) {
-        } else {
-          throw new Error('Failed to clock out');
+        if (response.status === HttpStatusCode.Ok) {
+          addToast({
+            title: 'Clocked in',
+            color: 'success',
+            description: `You have clocked out successfully!`,
+          });
         }
       })
       .catch((error) => {
         console.error('Error clocking in:', error);
         addToast({
-          title: 'Error clocking out',
+          title: 'Error Clocking out',
           color: 'danger',
           description: error.response.data.message,
         });
@@ -136,8 +157,9 @@ export const Attendance: React.FC = () => {
       <div className="flex flex-col gap-1">
         <h1 className="text-center">Actions</h1>
 
-        <div className="flex gap-2">
+        <div className="flex gap-2 justify-between">
           <Button
+            color="primary"
             onPress={handleClockIn}
             disabled={selectedEmployeeId === null}
           >
@@ -148,6 +170,27 @@ export const Attendance: React.FC = () => {
             disabled={selectedEmployeeId === null}
           >
             Clock out
+          </Button>
+        </div>
+
+        <h1 className="text-center">Attendance</h1>
+        <Table aria-label="Employee Attendance">
+          <TableHeader>
+            <TableColumn>Employee Code</TableColumn>
+            <TableColumn>Employee Name</TableColumn>
+            <TableColumn>Clock In</TableColumn>
+          </TableHeader>
+          <TableBody>
+            <TableRow key="1">
+              <TableCell>1</TableCell>
+              <TableCell>John Doe</TableCell>
+              <TableCell>9:00 AM</TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+        <div className="flex justify-end">
+          <Button color="primary" className="">
+            Refresh
           </Button>
         </div>
       </div>

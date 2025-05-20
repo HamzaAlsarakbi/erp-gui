@@ -5,7 +5,7 @@ import { UserState } from '@/features/auth/authSlice';
 
 const REST = {
   create: `${REST_HOST}/users`,
-  get: (username: string) => `${REST_HOST}/users/${username}`,
+  me: `${REST_HOST}/users/me/`,
   update: (username: string) => `${REST_HOST}/users/${username}`,
   delete: (username: string) => `${REST_HOST}/users/${username}`,
 };
@@ -17,11 +17,11 @@ const REST = {
  *
  * @returns the response from the server
  */
-const getUser = async (
-  username: string = '',
-): Promise<AxiosResponse<UserState, AppError>> =>
-  await axios.get(REST.get(username), { withCredentials: true });
+const getMe = async (): Promise<AxiosResponse<UserState, AppError>> =>
+  await axios.get(REST.me, { withCredentials: true });
 
 export const USERS_API = {
-  get: getUser,
+  get: {
+    me: getMe,
+  },
 };

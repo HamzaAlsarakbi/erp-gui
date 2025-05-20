@@ -26,7 +26,7 @@ const LoginComponent: React.FC = () => {
     try {
       const response = await AUTH_API.login(username, password);
       if (response.status === HttpStatusCode.Ok) {
-        const user = await USERS_API.get(username);
+        const user = await USERS_API.me(username);
 
         // Check if the user is logged in
         if (user.status === HttpStatusCode.Ok) {

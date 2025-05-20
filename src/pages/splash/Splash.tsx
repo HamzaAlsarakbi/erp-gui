@@ -19,7 +19,7 @@ const Splash = () => {
 
   useInterval(async () => {
     try {
-      let user = await USERS_API.get();
+      let user = await USERS_API.get.me();
       if (user.status === HttpStatusCode.Ok) {
         setUser(user.data);
         navigate(ROUTES.portal);
