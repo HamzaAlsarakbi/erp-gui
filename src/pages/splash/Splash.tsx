@@ -22,7 +22,7 @@ const Splash = () => {
       let user = await USERS_API.get.me();
       if (user.status === HttpStatusCode.Ok) {
         setUser(user.data);
-        navigate(ROUTES.portal);
+        navigate(ROUTES.dashboard);
       }
     } catch (error) {
       const e = error as AxiosError;

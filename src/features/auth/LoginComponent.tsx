@@ -22,7 +22,7 @@ const LoginComponent: React.FC = () => {
       const user = await USERS_API.get.me();
       if (user.status === HttpStatusCode.Ok) {
         setUser(user.data);
-        navigate(ROUTES.portal);
+        navigate(ROUTES.dashboard);
       }
     };
     fetchUser();
@@ -42,7 +42,7 @@ const LoginComponent: React.FC = () => {
         // Check if the user is logged in
         if (user.status === HttpStatusCode.Ok) {
           setUser(user.data);
-          navigate(ROUTES.portal);
+          navigate(ROUTES.dashboard);
         } else {
           setError('An unknown error occurred, cannot retrieve user data.');
           console.error(user);

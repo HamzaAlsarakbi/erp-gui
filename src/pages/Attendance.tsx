@@ -1,24 +1,18 @@
+import React, { useEffect, useState } from 'react';
+import { addToast, Button, Select, SelectItem } from '@heroui/react';
+
+import { HttpStatusCode } from 'axios';
+
 import { SECONDS_TO_MS } from '@/constants/time';
+
 import { EMPLOYEES_ADAPTER } from '@/features/employees/employeesAdapter';
 import { EMPLOYEES_API } from '@/features/employees/employeesApi';
 import { VITALS_API } from '@/features/vitals/vitalsApi';
 import { TimeFormat } from '@/features/vitals/vitalsModel';
+
 import { SelectMap } from '@/utils/heroui';
 import { useInterval } from '@/utils/useInterval';
-import {
-  addToast,
-  Button,
-  Select,
-  SelectItem,
-  Table,
-  TableBody,
-  TableCell,
-  TableColumn,
-  TableHeader,
-  TableRow,
-} from '@heroui/react';
-import { HttpStatusCode } from 'axios';
-import React, { useEffect, useState } from 'react';
+import { NavigationBar } from '@/components/Navbar';
 
 export const Attendance: React.FC = () => {
   const [localTime, setLocalTime] = useState(new Date());
@@ -131,6 +125,7 @@ export const Attendance: React.FC = () => {
 
   return (
     <div className="page flex flex-col items-center gap-10" id="attendance">
+      <NavigationBar />
       <h1 className="title">Attendance</h1>
       <div className="flex flex-col">
         <h2>{localTime.toLocaleTimeString()}</h2>
@@ -170,27 +165,6 @@ export const Attendance: React.FC = () => {
             disabled={selectedEmployeeId === null}
           >
             Clock out
-          </Button>
-        </div>
-
-        <h1 className="text-center">Attendance</h1>
-        <Table aria-label="Employee Attendance">
-          <TableHeader>
-            <TableColumn>Employee Code</TableColumn>
-            <TableColumn>Employee Name</TableColumn>
-            <TableColumn>Clock In</TableColumn>
-          </TableHeader>
-          <TableBody>
-            <TableRow key="1">
-              <TableCell>1</TableCell>
-              <TableCell>John Doe</TableCell>
-              <TableCell>9:00 AM</TableCell>
-            </TableRow>
-          </TableBody>
-        </Table>
-        <div className="flex justify-end">
-          <Button color="primary" className="">
-            Refresh
           </Button>
         </div>
       </div>

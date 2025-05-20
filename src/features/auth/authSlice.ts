@@ -1,5 +1,12 @@
 import { create } from 'zustand';
 
+export enum UserRole {
+  ADMIN = 'admin',
+  CUSTOMER = 'customer',
+  EMPLOYEE = 'employee',
+  MANAGER = 'manager',
+}
+
 /**
  * UserState interface represents the structure of a user object.
  *
@@ -19,7 +26,7 @@ export interface UserState {
   // The email address of the user
   email: string;
   // The role of the user (e.g., admin, customer, employee)
-  role: string;
+  role: UserRole;
   // The address of the user (optional)
   address: string | null;
   // The timestamp when the user was created
