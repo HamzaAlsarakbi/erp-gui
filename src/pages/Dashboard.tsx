@@ -2,7 +2,7 @@ import React from 'react';
 
 const Dashboard: React.FC = () => {
   return (
-    <div style={{ padding: '20px' }}>
+    <div className="page" id="portal" style={{ padding: '20px' }}>
       <h1>Dashboard</h1>
       <div
         style={{

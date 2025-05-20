@@ -7,7 +7,7 @@ import { SPLASH_HINTS } from '@/constants/splash';
 import { SECONDS_TO_MS } from '@/constants/time';
 import { AxiosError, HttpStatusCode } from 'axios';
 import Logo from '@/components/icons/Logo';
-import { USER_API } from '@/features/user/userApi';
+import { USERS_API } from '@/features/users/usersApi';
 import { useAuth } from '@/features/auth/authSlice';
 import { useNavigate } from 'react-router-dom';
 import { ROUTES } from '@/constants/routes';
@@ -19,7 +19,7 @@ const Splash = () => {
 
   useInterval(async () => {
     try {
-      let user = await USER_API.get();
+      let user = await USERS_API.get();
       if (user.status === HttpStatusCode.Ok) {
         setUser(user.data);
         navigate(ROUTES.portal);
@@ -45,7 +45,7 @@ const Splash = () => {
   }, []);
 
   return (
-    <div className="page splash-screen flex flex-col justify-center">
+    <div className="page splash-screen flex flex-col justify-center text-center">
       <div className="flex justify-center">
         <Logo size={512} />
       </div>

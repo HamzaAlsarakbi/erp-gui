@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { PasswordInput } from '@/components/PasswordInput/PasswordInput';
 import './LoginComponent.css';
 import { AUTH_API } from '@/features/auth/authApi';
-import { USER_API } from '@/features/user/userApi';
+import { USERS_API } from '@/features/users/usersApi';
 import { AxiosError, HttpStatusCode } from 'axios';
 import { useAuth } from '@/features/auth/authSlice';
 import { useNavigate } from 'react-router-dom';
@@ -26,7 +26,7 @@ const LoginComponent: React.FC = () => {
     try {
       const response = await AUTH_API.login(username, password);
       if (response.status === HttpStatusCode.Ok) {
-        const user = await USER_API.get(username);
+        const user = await USERS_API.get(username);
 
         // Check if the user is logged in
         if (user.status === HttpStatusCode.Ok) {
@@ -72,8 +72,8 @@ const LoginComponent: React.FC = () => {
   };
 
   return (
-    <div className="login-component glow-top flex flex-col px-4 py-4 gap-1 rounded-medium bg-zinc-100">
-      <h1 className="title fancy-text shadow-md">ERP</h1>
+    <div className="login-component glow-top flex flex-col px-4 py-4 gap-1 rounded-medium bg-zinc-300">
+      <h1 className="title fancy-text">ERP</h1>
       <h2>Login</h2>
       <form
         onSubmit={(event) => {

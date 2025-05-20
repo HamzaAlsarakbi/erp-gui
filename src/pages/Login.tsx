@@ -7,7 +7,7 @@ const Login: React.FC = () => {
   }, []);
 
   return (
-    <div className="page flex flex-col justify-center items-center">
+    <div className="page flex flex-col justify-center items-center" id="login">
       <LoginComponent />
     </div>
   );

@@ -10,7 +10,7 @@ const Portal: React.FC = () => {
   };
 
   return (
-    <div style={portalStyles}>
+    <div className="page" id="portal" style={portalStyles}>
       <h1>Portal Page</h1>
       <p>Select a destination:</p>
       <ul style={linkListStyles}>

@@ -22,6 +22,6 @@ const getUser = async (
 ): Promise<AxiosResponse<UserState, AppError>> =>
   await axios.get(REST.get(username), { withCredentials: true });
 
-export const USER_API = {
+export const USERS_API = {
   get: getUser,
 };

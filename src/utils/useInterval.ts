@@ -26,7 +26,6 @@ export const useInterval = (
 
   // Set up the interval.
   useEffect(() => {
-    console.log('Setting up interval, active?', active);
     if (!active.current) {
       return;
     }

@@ -44,7 +44,6 @@ body {
 #root,
 .page {
   height: 100vh;
-  padding: 0;
 }
 
 .gap-1 {
