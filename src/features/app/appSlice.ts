@@ -1,8 +1,6 @@
 import { Theme } from '@/assets/themes/themes';
 import { create } from 'zustand';
 
-export type AppPath = 'login' | 'splash' | 'dashboard' | 'clock_menu';
-
 export interface AppSlice {
   app: {
     theme: Theme;

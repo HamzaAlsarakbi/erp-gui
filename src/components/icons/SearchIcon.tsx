@@ -1,8 +1,8 @@
 export const SearchIcon: React.FC<{
-  size: number;
-  strokeWidth: number;
-  width: number;
-  height: number;
+  size?: number;
+  strokeWidth?: number;
+  width?: number;
+  height?: number;
 }> = ({ size = 24, strokeWidth = 1.5, width, height, ...props }) => {
   return (
     <svg

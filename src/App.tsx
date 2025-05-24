@@ -1,12 +1,15 @@
-import './App.css';
-import Login from '@/pages/Login';
-import Dashboard from './pages/Dashboard';
-import './App.css';
-import Splash from './pages/splash/Splash';
-import { Attendance } from './pages/Attendance';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { ROUTES } from './constants/routes';
-import { ProtectedRoutes } from './features/auth/ProtectedRoute';
+import './App.css';
+
+import { ROUTES } from '@/constants/routes';
+
+import { ProtectedRoutes } from '@/features/auth/ProtectedRoute';
+
+import { Attendance } from '@/pages/Attendance';
+import Dashboard from '@/pages/Dashboard';
+import { Inventory } from '@/pages/inventory/Inventory';
+import Login from '@/pages/Login';
+import Splash from '@/pages/splash/Splash';
 
 function App() {
   return (
@@ -19,6 +22,7 @@ function App() {
 
           <Route element={<ProtectedRoutes />}>
             <Route path={ROUTES.dashboard} element={<Dashboard />} />
+            <Route path={ROUTES.inventory} element={<Inventory />} />
           </Route>
 
           <Route path="*" element={<div>404</div>} />

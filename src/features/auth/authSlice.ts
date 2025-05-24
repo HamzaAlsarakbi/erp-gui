@@ -1,4 +1,5 @@
 import { create } from 'zustand';
+import { persist } from 'zustand/middleware';
 
 export enum UserRole {
   ADMIN = 'admin',
@@ -52,11 +53,15 @@ export interface AuthSlice {
   resetUser: () => void;
 }
 
-export const useAuth = create<AuthSlice>((set) => ({
-  user: null,
-  setUser: (user: UserState) =>
-    set(() => ({
-      user: user,
-    })),
-  resetUser: () => set(() => ({ user: null })),
-}));
+export const useAuth = create<AuthSlice>()(
+  persist(
+    (set) => ({
+      user: null,
+      setUser: (user: UserState) => set(() => ({ user })),
+      resetUser: () => set(() => ({ user: null })),
+    }),
+    {
+      name: 'auth-storage', // key in localStorage
+    },
+  ),
+);

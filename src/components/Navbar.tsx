@@ -5,7 +5,6 @@ import {
   NavbarContent,
   NavbarItem,
   Link,
-  Button,
   Input,
   Dropdown,
   DropdownTrigger,
@@ -33,7 +32,6 @@ export const AcmeLogo = () => {
 
 export const NavigationBar: React.FC = () => {
   const user = useAuth((s) => s.user);
-  console.log('user', user);
   const location = useLocation();
 
   return (

@@ -13,6 +13,7 @@ import { TimeFormat } from '@/features/vitals/vitalsModel';
 import { SelectMap } from '@/utils/heroui';
 import { useInterval } from '@/utils/useInterval';
 import { NavigationBar } from '@/components/Navbar';
+import { AttendanceTable } from '@/features/employees/AttendanceTable';
 
 export const Attendance: React.FC = () => {
   const [localTime, setLocalTime] = useState(new Date());
@@ -127,10 +128,12 @@ export const Attendance: React.FC = () => {
     <div className="page flex flex-col items-center gap-10" id="attendance">
       <NavigationBar />
       <h1 className="title">Attendance</h1>
-      <div className="flex flex-col">
-        <h2>{localTime.toLocaleTimeString()}</h2>
-        <h3 className={`text-${offsetSeconds > 900 ? 'red' : 'green'}-500`}>
-          Browser is {offsetSeconds > 900 ? 'not' : ''} synced
+      <div className="flex flex-col gap-1 text-center">
+        <h2 className="text-lg">{localTime.toLocaleTimeString()}</h2>
+        <h3
+          className={`text-xs text-${offsetSeconds > 900 ? 'red' : 'green'}-500`}
+        >
+          {offsetSeconds > 900 ? 'not' : ''} Synced
         </h3>
       </div>
 
@@ -168,6 +171,8 @@ export const Attendance: React.FC = () => {
           </Button>
         </div>
       </div>
+
+      <AttendanceTable />
     </div>
   );
 };

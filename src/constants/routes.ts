@@ -10,8 +10,9 @@ export const ROUTES = {
   attendance: '/attendance',
   dashboard: '/dashboard',
   inventory: '/inventory',
+  newProduct: '/inventory/new',
 
-  not_found: '*',
+  notFound: '*',
 };
 
 interface NavigationRoute {
